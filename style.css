@@ -1,0 +1,125 @@
+@font-face {
+	font-family: roboto;
+	src: url(Fonts/Roboto-Medium.ttf);
+}
+
+@font-face {
+	font-family: helvetica;
+	src: url(Fonts/Helvetica-Medium.ttf);
+}
+
+@font-face {
+	font-family: futura;
+	src: url(Fonts/Futura-Medium.otf);
+}
+
+@font-face {
+	font-family: courier;
+	src: url(Fonts/Courier-Medium.otf);
+}
+
+body {
+	background-color: #d3e9ff;
+	margin: 10px;
+	font-family: arial;
+}
+
+#top-menu-container { /* the div that holds all the menu items */
+	font-family: roboto;
+}
+
+.menu-button {	/* class of all menu buttons */	
+	margin-right: 2px;
+	margin-bottom: 3px;
+	background-color: #96e08d;
+	border: 1;
+	border-style: solid;
+	border-color: #77c46d;
+	border-radius: 3px;
+}
+
+#export-csv /* 'Export CSV' Button */
+{
+	margin-right: 0px;
+}
+
+#export-csv-input /* 'Export CSV' text box */
+{
+	margin-right: 6px;
+}
+
+#import-file-option {
+	display: inline-block;
+	font-size: 12.5pt;
+	height: 30px;
+	width: 250px;
+	margin-left: 8px;
+}
+
+.color-header {
+	display: inline-block;
+	text-align: center;
+}
+
+.color-wheel {
+	width: 100px;
+}
+
+.handsontable th {
+	color: #20252d !important; background: #beedb8 !important; 
+	}
+	
+hot.complete: last-child  {
+	background-color: red;
+}
+
+
+.change-color-label {
+	margin-left: 6px;
+}
+
+#font-dropdown {
+	width: 150px;
+	padding-left: 3px;
+	margin-right: 7px;
+}
+
+.font-menu-option {
+}
+
+#option-arial {
+	font-family: arial;
+}
+
+#option-times {
+	font-family: times;
+}
+
+#option-roboto {
+	font-family: roboto;
+}
+
+#option-helvetica {
+	font-family: helvetica;
+}
+
+#option-courier {
+	font-family: courier;
+	font-weight: bold;
+}
+
+#option-futura {
+	font-family: futura;
+}
+
+#option-verdana {
+	font-family: verdana;
+}
+
+.pagination {
+  padding: 10px 0;
+}
+.pagination a {
+  border: 1px solid grey;
+  padding: 2px 5px;
+}

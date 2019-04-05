@@ -1,0 +1,183 @@
+<!doctype html>
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/handsontable@latest/dist/handsontable.full.min.css">
+<link rel="stylesheet" type="text/css" href="https://handsontable.com/static/css/main.css">
+<link rel="stylesheet" type="text/css" href="style.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/handsontable/7.0.0/handsontable.full.min.js"></script>
+<script src = "https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.14.1/xlsx.full.min.js"></script>
+</head>
+<body>
+
+
+<h1>Handsontable Barclay's Project</h1>
+<div id="top-menu-container">
+
+	<!--              Import File button                  -->
+	<input type="file"  accept = ".xl, .xlsx, .ods" class="menu-button" id="import-file-option"></input>
+
+		<!--              Export CSV button                  -->
+	<button class="menu-button" id="export-csv">Export CSV</button>
+	<input type="text" size=7 value="" id="export-csv-input" placeholder="File Name"></input>
+
+		
+			<!--              Font Menu                  -->
+	<select onchange="hot.render()" value="arial" id="font-dropdown">
+	  <option id="option-arial" class="font-menu-option" value="arial">Arial</option>
+	  <option id="option-times"  class="font-menu-option" value="times">Times New Roman</option>
+	  <option id="option-roboto"  class="font-menu-option" value="roboto">Roboto</option>
+	  <option id="option-helvetica"  class="font-menu-option" value="helvetica">Helvetica</option>
+	  <option id="option-futura"  class="font-menu-option" value="futura">Futura</option>
+	  <option id="option-courier"  class="font-menu-option" value="courier">Courier</option>
+	  <option id="option-verdana"  class="font-menu-option" value="verdana">Verdana</option>
+	</select>
+	
+					<!--              Color Background                  -->
+	<div class="color-header">Background<br><input type='color' onchange='hot.render()' class="color-wheel" id='change-color-background-input' value='#FDFFFF'></input></div>
+					<!--              Color Text                  -->
+	<div class="color-header">Text<br><input type='color' onchange='hot.render()' class="color-wheel" id='change-color-text-input' value='#110000'></input></div>
+
+	<div class="pagination">
+	Page
+	  <a href="#1">1</a>
+	  <a href="#2">2</a>
+	  <a href="#3">3</a>
+	  <a href="#4">4</a>
+	  <a href="#5">5</a>
+	  <a href="#6">6</a>
+	</div>
+	
+</div>
+
+<div id="hot"></div>
+
+
+
+<script>
+
+var getData = (function () {
+    var data = [
+          [1,2,4,5,6,7,8,9,0],[0,0,0,0,0,0,0,0,0,0],[1,2,3,4,5,6,7,8,9,0],[1,2,4,5,6,7,8,9,0],[0,0,0,0,0,0,0,0,0,0],[1,2,3,4,5,6,7,8,9,0],
+          [1,2,4,5,6,7,8,9,0],[0,0,0,0,0,0,0,0,0,0],[1,2,3,4,5,6,7,8,9,0],[1,2,4,5,6,7,8,9,0],[0,0,0,0,0,0,0,0,0,0],[1,2,3,4,5,6,7,8,9,0],
+		  [1,2,4,5,6,7,8,9,0],[0,0,0,0,0,0,0,0,0,0],[1,2,3,4,5,6,7,8,9,0],[1,2,4,5,6,7,8,9,0],[0,0,0,0,0,0,0,0,0,0],[1,2,3,4,5,6,7,8,9,0],
+		  [1,2,4,5,6,7,8,9,0],[0,0,0,0,0,0,0,0,0,0],[1,2,3,4,5,6,7,8,9,0],[1,2,4,5,6,7,8,9,0],[0,0,0,0,0,0,0,0,0,0],[1,2,3,4,5,6,7,8,9,0],
+		  [1,2,4,5,6,7,8,9,0],[0,0,0,0,0,0,0,0,0,0],[1,2,3,4,5,6,7,8,9,0],[1,2,4,5,6,7,8,9,0],[0,0,0,0,0,0,0,0,0,0],[1,2,3,4,5,6,7,8,9,0],
+		  [1,2,4,5,6,7,8,9,0],[0,0,0,0,0,0,0,0,0,0],[1,2,3,4,5,6,7,8,9,0],[1,2,4,5,6,7,8,9,0],[0,0,0,0,0,0,0,0,0,0],[1,2,3,4,5,6,7,8,9,0],
+		  [1,2,4,5,6,7,8,9,0],[0,0,0,0,0,0,0,0,0,0],[1,2,3,4,5,6,7,8,9,0],[1,2,4,5,6,7,8,9,0],[0,0,0,0,0,0,0,0,0,0],[1,2,3,4,5,6,7,8,9,0],
+		  [1,2,4,5,6,7,8,9,0],[0,0,0,0,0,0,0,0,0,0],[1,2,3,4,5,6,7,8,9,0],[1,2,4,5,6,7,8,9,0],[0,0,0,0,0,0,0,0,0,0],[1,2,3,4,5,6,7,8,9,0],
+		  [1,2,4,5,6,7,8,9,0],[0,0,0,0,0,0,0,0,0,0],[1,2,3,4,5,6,7,8,9,0],[1,2,4,5,6,7,8,9,0],[0,0,0,0,0,0,0,0,0,0],[1,2,3,4,5,6,7,8,9,0],
+		  [1,2,4,5,6,7,8,9,0],[0,0,0,0,0,0,0,0,0,0],[1,2,3,4,5,6,7,8,9,0],[1,2,4,5,6,7,8,9,0],[0,0,0,0,0,0,0,0,0,0],[1,2,3,4,5,6,7,8,9,0],
+		  [1,2,4,5,6,7,8,9,0],[0,0,0,0,0,0,0,0,0,0],[1,2,3,4,5,6,7,8,9,0],[1,2,4,5,6,7,8,9,0],[0,0,0,0,0,0,0,0,0,0],[1,2,3,4,5,6,7,8,9,0],
+      ];
+  
+    return function () {
+      var page  = parseInt(window.location.hash.replace('#', ''), 10) || 1,
+        limit = 8,
+        row   = (page - 1) * limit,
+        count = page * limit,
+        part  = [];
+  
+      for (;row < count;row++) {
+        part.push(data[row]);
+      }
+  
+      return part;
+    }
+  })();
+
+var container = document.getElementById('hot');
+var hot = new Handsontable(container, {
+licenseKey: 'non-commercial-and-evaluation',
+renderer: function (instance, td, row, col, prop, value, cellProperties){
+	Handsontable.renderers.TextRenderer.apply(this,arguments);
+	
+	// Font renderer
+	document.getElementById("hot").style.fontFamily = document.getElementById("font-dropdown").value;
+	
+	td.style.color = document.getElementById("change-color-text-input").value;
+	td.style.background = document.getElementById("change-color-background-input").value;
+
+	//update footer
+	if (row == instance.countRows()-1)
+	{
+		td.style.fontWeight = 'bold';
+		td.style.color = '#0c2d42';
+		td.style.background = '#96e08d';
+	}
+},
+data: getData(),
+rowHeaders: true,
+colHeaders: true,
+nestedHeaders: [
+    ['A', {label: 'B', colspan: 8}, 'C'],
+    ['D', {label: 'E', colspan: 4}, {label: 'F', colspan: 4}, 'G'],
+    ['H', {label: 'I', colspan: 2}, {label: 'J', colspan: 2}, {label: 'K', colspan: 2}, {label: 'L', colspan: 2}, 'M'],
+    ['N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W']
+  ],
+filters: true,
+dropdownMenu: true,
+manualColumnResize: true,
+manualRowResize: true,
+copypaste: true,
+contextMenu: {
+	items: {
+		'row_above': true,
+		'row_below': true,
+		'col_left': true,
+		'col_right': true,
+		'remove_row': true,
+		'remove_col': true,
+		'clear_column': true,
+		'undo': true,
+		'redo': true,
+		'make_read_only': true,
+		'alignment': true,
+	}
+},
+});
+
+Handsontable.dom.addEvent(window, 'hashchange', function (event) {
+    hot.loadData(getData());
+  });
+
+document.getElementById("export-csv").addEventListener("click", function(event) { var fileNameVar = ""; if (document.getElementById("export-csv-input").value == "") {fileNameVar = "spreadsheet-export";} else {fileNameVar = document.getElementById("export-csv-input").value}hot.getPlugin("exportFile").downloadFile("csv", {filename: fileNameVar});});
+
+document.getElementById("import-file-option").addEventListener("change", function(changeEvent){
+
+	var reader = new FileReader();
+	
+	reader.onload = function(evt){
+		
+		var data = evt.target.result;
+		var workbook = XLSX.read(data, {type: 'binary'});
+		var headerNames = XLSX.utils.sheet_to_json(workbook.Sheets[workbook.SheetNames[0]], {header: 1})[0];
+		var importData = XLSX.utils.sheet_to_json(workbook.Sheets[workbook.SheetNames[0]]);
+		
+	var headerWidthArray = [];	
+		
+	for (var i = 0; i < headerNames.length; i++)
+	{
+		headerWidthArray.push((headerNames[i].length*12 + 30));
+	}
+	
+	console.log(headerWidthArray);
+	
+	importData.push([]);
+	
+	for(var i = 0; i < 2; i++){
+		setTimeout(function(){
+			hot.loadData(importData);
+			hot.updateSettings({colHeaders: headerNames, colWidths: headerWidthArray});
+		}, 10)
+	 }	
+
+	
+	}
+
+	reader.readAsBinaryString(changeEvent.target.files[0]);
+	hot.render();
+});
+
+</script>
+</body>
+</html>
